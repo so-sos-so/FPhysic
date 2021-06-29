@@ -166,7 +166,7 @@ namespace FLog
             }
         }
 
-        public static ILogger Logger;
+        private static ILogger logger;
         public static LogConfig Config { get; private set; }
         private static StreamWriter logFileWriter = null;
         private static object logLock = new object();
@@ -182,11 +182,11 @@ namespace FLog
 
             if (cfg.loggerEnum == LoggerType.Console)
             {
-                Logger = new ConsoleLogger();
+                logger = new ConsoleLogger();
             }
             else
             {
-                Logger = new UnityLogger();
+                logger = new UnityLogger();
             }
 
             if (cfg.enableSave == false)
@@ -248,7 +248,7 @@ namespace FLog
             }
 
             string msg = DecorateLog(Config.enableTrace, args);
-            Logger.Log(msg);
+            logger.Log(msg);
             if (Config.enableSave)
             {
                 WriteToFile($"[L]{msg}");
@@ -264,7 +264,7 @@ namespace FLog
 
             string msg = DecorateLog(Config.enableTrace, args);
 
-            Logger.Log(msg, color);
+            logger.Log(msg, color);
             if (Config.enableSave)
             {
                 WriteToFile($"[L]{msg}");
@@ -280,7 +280,7 @@ namespace FLog
 
             string msg = DecorateLog(Config.enableTrace, args);
             
-            Logger.Log(msg, LogColor.Magenta);
+            logger.Log(msg, LogColor.Magenta);
             if (Config.enableSave)
             {
                 WriteToFile($"[T]{msg}");
@@ -296,7 +296,7 @@ namespace FLog
 
             string msg = DecorateLog(Config.enableTrace, args);
             
-            Logger.Warn(msg);
+            logger.Warn(msg);
             if (Config.enableSave)
             {
                 WriteToFile($"[W]{msg}");
@@ -315,7 +315,7 @@ namespace FLog
 
             string msg = DecorateLog(Config.enableTrace, args);
             
-            Logger.Error(msg);
+            logger.Error(msg);
             if (Config.enableSave)
             {
                 WriteToFile($"[E]{msg}");

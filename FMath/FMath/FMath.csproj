@@ -16,6 +16,9 @@
       <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\..\UnityDll\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
+	   <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Tests</_Parameter1>
+	</AssemblyAttribute>
     </ItemGroup>
 
 </Project>

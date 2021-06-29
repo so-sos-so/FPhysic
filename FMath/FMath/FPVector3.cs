@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace FMath
 {
@@ -98,6 +99,11 @@ namespace FMath
             if (num == 0) return FPAngle.zero;
             FPInt val = dot / num;
             return FPMath.Acos(val);
+        }
+        
+        public static implicit operator FPVector3(Vector3 val)
+        {
+            return new FPVector3(val);
         }
 
         #endregion

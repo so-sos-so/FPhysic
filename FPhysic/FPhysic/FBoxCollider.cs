@@ -5,15 +5,16 @@ namespace FPhysic
     public class FBoxCollider : FColliderBase
     {
         public FPVector3 Size { get; }
-        //轴向
-        public FPVector3[] Axis;
 
-        public FBoxCollider(ColliderConfig config)
+        public FBoxCollider(FPVector3 center, FPVector3 size) : base(center)
         {
-            Name = config.Name;
-            Position = config.Position;
-            Size = config.Size;
-            Axis = new[] {config.Axis[0], config.Axis[1], config.Axis[2]};
+            Size = size;
+        }
+
+        public override bool TryInteraction(FColliderBase other, out FPVector3 result)
+        {
+            result = FPVector3.zero;
+            return true;
         }
     }
 }
