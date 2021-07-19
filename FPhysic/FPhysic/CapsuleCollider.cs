@@ -2,11 +2,11 @@
 
 namespace FPhysic
 {
-    public class FCapsuleCollider : FColliderBase
+    public class CapsuleCollider : ColliderBase
     {
         public FPInt Radius { get; }
 
-        public FCapsuleCollider(FPVector3 center, FPInt radius) : base(center)
+        public CapsuleCollider(FPVector3 center, FPInt radius) : base(center)
         {
             Radius = radius;
         }

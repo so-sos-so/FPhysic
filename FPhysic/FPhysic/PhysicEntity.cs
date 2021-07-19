@@ -2,16 +2,17 @@
 
 namespace FPhysic
 {
-    public class FPhysicEntity : IEntity
+    public class PhysicEntity : IEntity
     {
-        public FColliderBase Collider { get; }
+        public ColliderBase Collider { get; }
         public FPVector3 Position { get; set; } = FPVector3.zero;
-        public FPVector3 Rotation { get; set; } = FPVector3.zero;
+        public FPVector3 Forward { get; set; } = FPVector3.zero;
+        public FPVector3 Right { get; set; } = FPVector3.zero;
         public bool MoveAble { get; }
         public bool IsTrigger { get; }
         public bool HasMoved { get; private set; }
 
-        public FPhysicEntity(bool moveAble = false, FColliderBase collider = null, bool trigger = false)
+        public PhysicEntity(bool moveAble = false, ColliderBase collider = null, bool trigger = false)
         {
             Collider = collider;
             Collider?.SetEntity(this);

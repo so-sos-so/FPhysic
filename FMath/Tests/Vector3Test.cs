@@ -32,7 +32,7 @@ namespace Tests
             Assert.AreEqual(vec1.normalize, FPVector3.Normalize(vec1));
 
             //Assert.AreEqual(90, FPVector3.Angle(FPVector3.up, FPVector3.right).Angle);
-            Assert.True(Math.Abs(Vector3.Angle(Vector3.one, new Vector3(1, 2, 3))- FPVector3.Angle(FPVector3.one, new FPVector3(1, 2, 3)).Angle) <= 0.1f);
+            Assert.True(Math.Abs(Vector3.Angle(Vector3.one, new Vector3(1, 2, 3))- FPVector3.Angle(FPVector3.one, new FPVector3(1, 2, 3)).Angle) <= 1);
             
             Assert.AreEqual(Vector3.Dot(Vector3.one, new Vector3(1, 2, 3)),
                 FPVector3.Dot(FPVector3.one, new FPVector3(1, 2, 3)).RawFloat);

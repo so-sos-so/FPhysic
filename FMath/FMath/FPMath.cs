@@ -21,6 +21,16 @@ namespace FMath
             return result;
         }
 
+        public static FPInt Cos(FPInt rad)
+        {
+            return Math.Cos(rad.RawFloat);
+        }
+        
+        public static FPInt Sin(FPInt rad)
+        {
+            return Math.Sin(rad.RawFloat);
+        }
+        
         public static FPAngle Acos(FPInt val)
         {
             FPInt rate = val * AcosTable.HalfIndexCount + AcosTable.HalfIndexCount;
@@ -36,6 +46,17 @@ namespace FMath
             else if (value > max)
                 value = max;
             return value;
+        }
+
+        public static FPInt Pow(FPInt x, FPInt y)
+        {
+            FPInt result = 1;
+            for (int i = 0; i < y; i++)
+            {
+                result *= x;
+            }
+
+            return result;
         }
     }
 }

@@ -138,6 +138,11 @@ namespace FMath
         {
             return new FPInt(val);
         }
+        
+        public static implicit operator FPInt(double val)
+        {
+            return new FPInt((float)val);
+        }
 
         public bool Equals(FPInt other)
         {

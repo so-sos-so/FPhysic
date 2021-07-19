@@ -76,7 +76,10 @@ namespace FMath
 
         public void Normalize()
         {
-            this = normalize;
+            var nor = normalize;
+            x = nor.x;
+            y = nor.y;
+            z = nor.z;
         }
 
         public FPVector3 normalize => Normalize(this);
