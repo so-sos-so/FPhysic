@@ -61,3 +61,6 @@ crashlytics-build.properties
 obj
 bin
 .idea
+/Unity/*.csproj
+/Unity/*.sln
+/Unity/Logs
