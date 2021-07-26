@@ -64,3 +64,5 @@ bin
 /Unity/*.csproj
 /Unity/*.sln
 /Unity/Logs
+/Unity/Library
+/Unity/Temp
