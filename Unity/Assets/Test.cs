@@ -11,7 +11,7 @@ public class Test : MonoBehaviour
     
     void Start()
     {
-        
+        GetComponents<>()
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class Test : MonoBehaviour
 
     bool Intersects(SphereCollider sphereCollider, BoxCollider boxCollider)
     {
+        
         Matrix4x4 rota = Matrix4x4.Rotate(Quaternion.Euler(-boxCollider.transform.eulerAngles));
         Vector3 distance =  (Vector3)(rota *sphereCollider.transform.position) - boxCollider.transform.position;
         distance = new Vector3(Mathf.Abs(distance.x), 0, Mathf.Abs(distance.z));

@@ -6,7 +6,7 @@ namespace FPhysic
     {
         public FPInt Radius { get; }
 
-        public CapsuleCollider(FPVector3 center, FPInt radius) : base(center)
+        public CapsuleCollider(Entity entity, FPVector3 center, FPInt radius) : base(entity, center)
         {
             Radius = radius;
         }

@@ -90,6 +90,8 @@
             return s;
         }
 
+        public static implicit operator FPVector3(FPVector4 v) => new FPVector3(v.x, v.y, v.z);
+        
         public bool Equals(FPVector4 other)
         {
             return this == other;

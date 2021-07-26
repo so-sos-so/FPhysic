@@ -31,6 +31,11 @@ namespace FMath
             return Math.Sin(rad.RawFloat);
         }
         
+        public static FPInt Abs(FPInt val)
+        {
+            return val > 0 ? val : -val;
+        }
+        
         public static FPAngle Acos(FPInt val)
         {
             FPInt rate = val * AcosTable.HalfIndexCount + AcosTable.HalfIndexCount;
