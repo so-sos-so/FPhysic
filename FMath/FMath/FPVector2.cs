@@ -39,6 +39,8 @@ namespace FMath
 
         public static FPVector2 operator *(FPVector2 a, FPInt d) => new FPVector2(a.x * d, a.y * d);
 
+        public static FPVector2 operator *(FPVector2 a, FPVector2 b) => new FPVector2(a.x * b.x, a.y * b.y);
+
         public static FPVector2 operator *(FPInt d, FPVector2 a) => new FPVector2(a.x * d, a.y * d);
 
         public static FPVector2 operator /(FPVector2 a, FPInt d) => new FPVector2(a.x / d, a.y / d);

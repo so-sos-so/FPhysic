@@ -6,17 +6,18 @@ namespace FPhysic
 {
     public class ColliderBase
     {
-        public FPVector3 Center { get; }
-        protected FPVector3 Position => Entity.Position + Center;
-        protected FPVector3 Rotation => Entity.Rotation;
-        protected FPInt Mess;
-        protected FPVector3 Scale => Entity.Scale;
+        public FPVector2 Center { get; }
+        public FPVector2 Position => Entity.Position + Center;
+        public FPInt Rotation => Entity.Rotation;
+        public FPVector2 Scale => Entity.Scale;
+        public bool IsTrigger { get; }
         protected Entity Entity;
 
-        public ColliderBase(Entity entity, FPVector3 center)
+        public ColliderBase(Entity entity, FPVector2 center, bool isTrigger = false)
         {
             Center = center;
             Entity = entity;
+            IsTrigger = isTrigger;
         }
 
         public static bool Intersects(ColliderBase collider1, ColliderBase collider2)
@@ -40,11 +41,12 @@ namespace FPhysic
         /// </summary>
         public static bool Intersects(BoxCollider boxCollider, CapsuleCollider capsuleCollider)
         {
-            FPMatrix4x4 rota = FPMatrix4x4.Rotate(-boxCollider.Rotation);
-            FPVector3 distance = (FPVector3) (rota * capsuleCollider.Position) - boxCollider.Position;
+            FPMatrix4x4 rota = FPMatrix4x4.Rotate(new FPVector3(0, -boxCollider.Rotation, 0));
+            FPVector3 distance = (FPVector3) (rota * new FPVector3(0, -capsuleCollider.Rotation, 0)) -
+                                 new FPVector3(boxCollider.Position.x, 0, boxCollider.Position.y);
             distance = new FPVector3(FPMath.Abs(distance.x), 0, FPMath.Abs(distance.z));
             var halfWidth = boxCollider.Size.x / 2 * boxCollider.Scale.x;
-            var halfHeight = boxCollider.Size.z / 2 * boxCollider.Scale.z;
+            var halfHeight = boxCollider.Size.y / 2 * boxCollider.Scale.y;
             var radius = capsuleCollider.Radius * capsuleCollider.Scale.x;
 
             if (distance.x > halfWidth + radius) return false;
@@ -84,8 +86,10 @@ namespace FPhysic
         {
             ColliderBase result = collider switch
             {
-                UnityEngine.BoxCollider boxCollider => new BoxCollider(entity, boxCollider.center, boxCollider.size),
-                UnityEngine.CapsuleCollider capsuleCollider => new CapsuleCollider(entity, capsuleCollider.center,
+                UnityEngine.BoxCollider boxCollider => new BoxCollider(entity,
+                    new FPVector2(boxCollider.center.x, boxCollider.center.z), new FPVector2(boxCollider.size.x, boxCollider.size.z)),
+                UnityEngine.CapsuleCollider capsuleCollider => new CapsuleCollider(entity,
+                    new FPVector2(capsuleCollider.center.x, capsuleCollider.center.z),
                     capsuleCollider.radius),
                 _ => throw new NullReferenceException($"在{collider.name}上没有找到BoxCollider或者CapsuleCollider")
             };
@@ -101,18 +105,19 @@ namespace FPhysic
         /// <exception cref="NullReferenceException"></exception>
         public static ColliderBase Create(Entity entity, GameObject gameObject)
         {
-            return Create(entity,gameObject.GetComponent<Collider>());
+            return Create(entity, gameObject.GetComponent<Collider>());
         }
 
-        public static ColliderBase Create(Entity entity,FPVector3 center, FPVector3 size)
+        public static ColliderBase Create(Entity entity, FPVector3 center, FPVector3 size)
         {
-            return new BoxCollider(entity, center, size);
+            return new BoxCollider(entity, new FPVector2(center.x, center.z), new FPVector2(size.x, size.z));
         }
-        
-        public static ColliderBase Create(Entity entity,FPVector3 center,FPInt radius)
+
+        public static ColliderBase Create(Entity entity, FPVector3 center, FPInt radius)
         {
-            return new CapsuleCollider(entity,center, radius);
+            return new CapsuleCollider(entity, new FPVector2(center.x, center.z), radius);
         }
+
         #endregion
     }
 }

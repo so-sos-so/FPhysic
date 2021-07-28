@@ -11,7 +11,7 @@ public class Test : MonoBehaviour
     
     void Start()
     {
-        GetComponents<>()
+        
     }
 
     // Update is called once per frame

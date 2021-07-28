@@ -6,9 +6,9 @@ namespace FPhysic
 {
     public abstract class Entity
     {
-        public FPVector3 Position { get; set; }
-        public FPVector3 Rotation { get; set; }
-        public FPVector3 Scale { get; set; }
+        public FPVector2 Position { get; set; } = FPVector2.zero;
+        public FPInt Rotation { get; set; } = 0;
+        public FPVector2 Scale { get; set; } = FPVector2.one;
 
         private Dictionary<Type, List<object>> components = new Dictionary<Type, List<object>>();
         
