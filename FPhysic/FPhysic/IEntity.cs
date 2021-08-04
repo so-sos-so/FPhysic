@@ -9,6 +9,8 @@ namespace FPhysic
         public FPVector2 Position { get; set; } = FPVector2.zero;
         public FPInt Rotation { get; set; } = 0;
         public FPVector2 Scale { get; set; } = FPVector2.one;
+        public FPVector2 Forward { get; set; } = new FPVector2(0, 1);
+        public FPVector2 Right { get; set; } = new FPVector2(1, 0);
 
         private Dictionary<Type, List<object>> components = new Dictionary<Type, List<object>>();
         

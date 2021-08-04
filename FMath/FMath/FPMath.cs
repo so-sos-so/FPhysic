@@ -63,5 +63,11 @@ namespace FMath
 
             return result;
         }
+
+        private static FPInt a2R = 0.0174532;
+        public static FPInt AngleToRadian(FPInt rad)
+        {
+            return rad * a2R;
+        }
     }
 }

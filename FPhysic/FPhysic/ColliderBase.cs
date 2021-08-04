@@ -10,6 +10,8 @@ namespace FPhysic
         public FPVector2 Position => Entity.Position + Center;
         public FPInt Rotation => Entity.Rotation;
         public FPVector2 Scale => Entity.Scale;
+        public FPVector2 Forward => Entity.Forward;
+        public FPVector2 Right => Entity.Right;
         public bool IsTrigger { get; }
         protected Entity Entity;
 
@@ -42,7 +44,7 @@ namespace FPhysic
         public static bool Intersects(BoxCollider boxCollider, CapsuleCollider capsuleCollider)
         {
             FPMatrix4x4 rota = FPMatrix4x4.Rotate(new FPVector3(0, -boxCollider.Rotation, 0));
-            FPVector3 distance = (FPVector3) (rota * new FPVector3(0, -capsuleCollider.Rotation, 0)) -
+            FPVector3 distance = (FPVector3)(rota * new FPVector3(0, -capsuleCollider.Rotation, 0)) -
                                  new FPVector3(boxCollider.Position.x, 0, boxCollider.Position.y);
             distance = new FPVector3(FPMath.Abs(distance.x), 0, FPMath.Abs(distance.z));
             var halfWidth = boxCollider.Size.x / 2 * boxCollider.Scale.x;
