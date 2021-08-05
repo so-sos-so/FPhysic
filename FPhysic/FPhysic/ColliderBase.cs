@@ -22,22 +22,6 @@ namespace FPhysic
             IsTrigger = isTrigger;
         }
 
-        public static bool Intersects(ColliderBase collider1, ColliderBase collider2)
-        {
-            return collider1 switch
-            {
-                CapsuleCollider capsuleCollider when collider2 is CapsuleCollider capsuleCollider2 => Intersects(
-                    capsuleCollider, capsuleCollider2),
-                CapsuleCollider capsuleCollider when collider2 is BoxCollider boxCollider => Intersects(boxCollider,
-                    capsuleCollider),
-                BoxCollider boxCollider when collider2 is CapsuleCollider capsuleCollider2 => Intersects(boxCollider,
-                    capsuleCollider2),
-                BoxCollider boxCollider when collider2 is BoxCollider boxCollider2 => Intersects(boxCollider,
-                    boxCollider2),
-                _ => throw new Exception("????")
-            };
-        }
-
         /// <summary>
         /// 方形和圆形是否交叉
         /// </summary>
@@ -86,17 +70,25 @@ namespace FPhysic
         /// <exception cref="NullReferenceException"></exception>
         public static ColliderBase Create(Entity entity, Collider collider)
         {
-            ColliderBase result = collider switch
+            if (collider is UnityEngine.BoxCollider boxCollider)
             {
-                UnityEngine.BoxCollider boxCollider => new BoxCollider(entity,
-                    new FPVector2(boxCollider.center.x, boxCollider.center.z), new FPVector2(boxCollider.size.x, boxCollider.size.z)),
-                UnityEngine.CapsuleCollider capsuleCollider => new CapsuleCollider(entity,
+                return new BoxCollider(entity,
+                    new FPVector2(boxCollider.center.x, boxCollider.center.z),
+                    new FPVector2(boxCollider.size.x, boxCollider.size.z));
+            }
+            if (collider is UnityEngine.CapsuleCollider capsuleCollider)
+            {
+                return new CapsuleCollider(entity,
                     new FPVector2(capsuleCollider.center.x, capsuleCollider.center.z),
-                    capsuleCollider.radius),
-                _ => throw new NullReferenceException($"在{collider.name}上没有找到BoxCollider或者CapsuleCollider")
-            };
-
-            return result;
+                    capsuleCollider.radius);
+            }
+            if (collider is UnityEngine.SphereCollider sphereCollider)
+            {
+                return new CapsuleCollider(entity,
+                    new FPVector2(sphereCollider.center.x, sphereCollider.center.z),
+                    sphereCollider.radius);
+            }
+            throw new NullReferenceException($"在{collider.name}上没有找到BoxCollider或者CapsuleCollider");
         }
 
         /// <summary>

@@ -18,8 +18,10 @@ namespace FPhysic
         {
             var type = typeof(T);
             List<object> list = null;
-            foreach (var (componentType, components) in components)
+            foreach (var keyValue in components)
             {
+                var componentType = keyValue.Key;
+                var components = keyValue.Value;
                 if (componentType != type && !type.IsAssignableFrom(componentType)) continue;
                 list = components;
                 break;
@@ -36,6 +38,15 @@ namespace FPhysic
                 components[typeof(T)] = list;
             }
             list.Add(component);
+        }
+
+        internal void TransformIdentity()
+        {
+            Position = FPVector2.zero;
+            Rotation = 0;
+            Forward = new FPVector2(0, 1);
+            Right = new FPVector2(1, 0);
+            Scale = FPVector2.one;
         }
     }
 }

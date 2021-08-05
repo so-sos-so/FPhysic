@@ -25,6 +25,16 @@ namespace FMath
         {
             return Math.Cos(rad.RawFloat);
         }
+
+        public static FPInt Max(FPInt val1, FPInt val2)
+        {
+            return val1 > val2 ? val1 : val2;
+        }
+        
+        public static FPInt Min(FPInt val1, FPInt val2)
+        {
+            return val1 < val2 ? val1 : val2;
+        }
         
         public static FPInt Sin(FPInt rad)
         {

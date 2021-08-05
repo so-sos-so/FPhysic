@@ -1,8 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>Physic</RootNamespace>
+        <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <OutputPath>..\..\Unity\Assets\Plugins\Physic</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
