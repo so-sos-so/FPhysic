@@ -4,10 +4,10 @@ namespace FPhysic
 {
     public class BoxCollider : ColliderBase
     {
-        public FPVector2 Size => size * Entity.Scale;
+        public FPVector2 Size => size * PhysicEntity.Scale;
         private FPVector2 size;
 
-        public BoxCollider(Entity entity, FPVector2 center, FPVector2 size) : base(entity, center)
+        public BoxCollider(FPVector2 center, FPVector2 size) : base(center)
         {
             this.size = size;
         }

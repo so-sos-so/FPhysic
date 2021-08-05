@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using FPhysic;
 using UnityEngine;
-using Rigidbody = FPhysic.Rigidbody;
 
 public class ColliderCtrl : MonoBehaviour
 {
     public static ColliderCtrl Ins;
-    private List<Entity> colliders = new List<Entity>();
-    private Dictionary<Entity, Transform> players = new Dictionary<Entity, Transform>();
+    private List<PhysicEntity> colliders = new List<PhysicEntity>();
+    private Dictionary<PhysicEntity, Transform> players = new Dictionary<PhysicEntity, Transform>();
     
     private void Awake()
     {
         Ins = this;
     }
 
-    public void AddEntity(Entity entity, Transform go)
+    public void AddEntity(PhysicEntity entity, Transform go)
     {
-        if (entity.GetComponent<Rigidbody>() != null)
+        if (entity.IsUnit)
         {
             players[entity] = go;
         }

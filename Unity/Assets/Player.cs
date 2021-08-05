@@ -2,7 +2,7 @@ using System;
 using FMath;
 using FPhysic;
 using UnityEngine;
-using Rigidbody = FPhysic.Rigidbody;
+using Object = UnityEngine.Object;
 
 public class Player : MonoBehaviour
 {
@@ -10,17 +10,17 @@ public class Player : MonoBehaviour
     public float Speed;
     private void Start()
     {
-        physicEntity = new PhysicEntity();
+        var collider = GetComponent<Collider>();
+        physicEntity = PhysicEntity.Create(true, collider);
         var forward = transform.forward;
         var right = transform.right;
         var scale = transform.localScale;
         physicEntity.Forward = new FPVector2(forward.x, forward.z);
         physicEntity.Right = new FPVector2(right.x, right.z);
         physicEntity.Scale = new FPVector2(scale.x, scale.z);
-        physicEntity.AddComponent(ColliderBase.Create(physicEntity, gameObject));
-        physicEntity.AddComponent(new Rigidbody());
         ColliderCtrl.Ins.AddEntity(physicEntity, transform);
         physicEntity.Rotation = transform.eulerAngles.y;
+        Object.Destroy(collider);
     }
 
     private void Update()

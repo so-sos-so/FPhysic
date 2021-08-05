@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    public class Tests
+    public class PhysicTests
     {
         private PhysicEntity player;
         private PhysicEntity capCollider;
@@ -15,15 +15,9 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            player = new PhysicEntity();
-            player.AddComponent(new CapsuleCollider(player, FPVector2.zero, FPInt.one / 2));
-            player.AddComponent(new Rigidbody());
-
-            capCollider = new PhysicEntity();
-            capCollider.AddComponent(new CapsuleCollider(capCollider, FPVector2.zero, 0.5));
-
-            boxCollider = new PhysicEntity();
-            boxCollider.AddComponent(new BoxCollider(boxCollider, FPVector2.zero, FPVector2.one));
+            player = PhysicEntity.Create(true, FPVector2.zero, FPInt.one / 2);
+            capCollider = PhysicEntity.Create(true,  FPVector2.zero, 0.5);
+            boxCollider = PhysicEntity.Create(true,  FPVector2.zero, FPVector2.one);
         }
 
         [Test]
@@ -34,7 +28,7 @@ namespace Tests
             boxCollider.Position = new FPVector2(0, 0);
             var collid = ColliderCtrl.TryToCollision(player, boxCollider, out var offset);
             Assert.IsTrue(collid);
-            Assert.IsTrue(FPMath.Abs(offset.x - -0.1) <= 0.001);
+            Assert.IsTrue(FPMath.Abs(offset.y - 0.1) <= 0.001);
         }
         
         [Test]
